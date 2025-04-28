@@ -3,15 +3,20 @@ from aiogram.types import Message, FSInputFile
 import json
 import os
 from datetime import datetime, timedelta
+
 from utils import (
     load_json, save_json, USERS_FILE, ADMIN_IDS,
+    
     get_user_list, get_user
+    
 )
 
 router = Router()
 
 def format_json(data):
+    
     return json.dumps(data, indent=4, ensure_ascii=False)
+
 
 @router.message(F.text == "/dump_users")
 async def dump_users_cmd(message: Message):
@@ -21,8 +26,11 @@ async def dump_users_cmd(message: Message):
     data = load_json(USERS_FILE)
     text = format_json(data)
     if len(text) > 4000:
+        
         if os.path.exists(USERS_FILE):
+            
             await message.answer_document(FSInputFile(USERS_FILE), caption="Users Data")
+            
         else:
             await message.answer("Users file not found.")
     else:

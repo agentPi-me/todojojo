@@ -84,11 +84,15 @@ def add_task(user_id, task_text, status="Новая", deadline=""):
     uid = str(user_id)
     if uid not in tasks:
         tasks[uid] = []
+        
     tasks[uid].append({
         "task": task_text,
         "done": False,
         "status": status,
         "deadline": deadline
+        
+        
+        
     })
     save_json(TASKS_FILE, tasks)
 
